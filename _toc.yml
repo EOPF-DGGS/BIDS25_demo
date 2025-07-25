@@ -1,0 +1,13 @@
+format: jb-book
+root: intro
+
+chapters:
+  - file: dggs_intro
+    title: Introduction to DGGS
+
+  - file: dggs_visualization
+    title: Visualization and Analytics
+
+  - file: dggs_eo_example
+    title: Example with EO Data
+    

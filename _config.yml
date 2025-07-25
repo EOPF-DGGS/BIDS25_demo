@@ -1,0 +1,22 @@
+title: "DGGS: Scalable Geospatial Data Processing for EO"
+author: Big Data From Space (BiDS) 2025 Demo Team
+logo: images/grid4earth_logo.png
+language: en
+only_build_toc_files: true
+execute:
+  execute_notebooks: false
+
+html:
+  use_repository_button: true
+  use_issues_button: true
+  use_download_button: true
+  logo: images/grid4earth_logo.png
+
+repository:
+  url: https://github.com/EOPF-DGGS/BIDS25_demo
+  path_to_book: ""
+  branch: main
+
+launch_buttons:
+  notebook_interface: jupyterlab
+  thebe: true
