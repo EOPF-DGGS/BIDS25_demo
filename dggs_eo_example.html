@@ -1,0 +1,3448 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>EO Data Example &#8212; DGGS: Scalable Geospatial Data Processing for EO</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'dggs_eo_example';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Visualization and Analytics" href="dggs_visualization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/grid4earth_logo.png" class="logo__image only-light" alt="DGGS: Scalable Geospatial Data Processing for EO - Home"/>
+    <script>document.write(`<img src="_static/grid4earth_logo.png" class="logo__image only-dark" alt="DGGS: Scalable Geospatial Data Processing for EO - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dggs_intro.html">Why DGGS? Motivation</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="dggs_visualization.html">Visualization and Analytics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">EO Data Example</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EOPF-DGGS/BIDS25_demo" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EOPF-DGGS/BIDS25_demo/issues/new?title=Issue%20on%20page%20%2Fdggs_eo_example.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/dggs_eo_example.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>EO Data Example</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">EO Data Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multibands-visualisation-r-g-b">multibands visualisation R/G/B</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="eo-data-example">
+<h1>EO Data Example<a class="headerlink" href="#eo-data-example" title="Link to this heading">#</a></h1>
+<p>This notebook shows a practical example showing how to exploire Sentinel-2 Level 2A data in HEALPix.</p>
+<p>The data we show here is created using notebook at <a class="github reference external" href="https://github.com/jmdelouis/Sentinel2healgrid/blob/main/Notebooks/EOPF_Sentinel2_To_Zarr.ipynb">jmdelouis/Sentinel2healgrid</a></p>
+<ul class="simple">
+<li><p><strong>Basic visualizations:</strong></p>
+<ul>
+<li><p>We will open HEALPix/Zarr Sentineo 2 test data.</p></li>
+<li><p>Selecting areas/cells</p></li>
+<li><p>Interactive plotting DGGS grids over a map</p></li>
+</ul>
+</li>
+<li><p><strong>Simple analytics:</strong></p>
+<ul>
+<li><p>Example: time series over selected cells.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">healpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">hp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xdggs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">fsspec</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sparse</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dtotal</span><span class="o">=</span><span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span>
+    <span class="s1">&#39;https://data-taos.ifremer.fr/EGU25_CFOSAT/Sentinel2_test.zarr&#39;</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">xdggs</span><span class="o">.</span><span class="n">decode</span><span class="p">)</span>
+<span class="n">dtotal</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/1c/q1jqr0h541n720bvcqb_0rsm001mmz/T/ipykernel_88203/1708922290.py:1: SerializationWarning: Unable to decode time axis into full numpy.datetime64 objects, continuing using cftime.datetime objects instead, reason: dates prior reform date (1582-10-15). To silence this warning specify &#39;use_cftime=True&#39;.
+  dtotal=xr.open_zarr(
+</pre></div>
+</div>
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base rgba(0, 0, 0, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, white)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 15))
+  );
+}
+
+html[theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
+body.vscode-dark {
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base, rgba(255, 255, 255, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, #111111)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 15))
+  );
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: inline-block;
+  opacity: 0;
+  height: 0;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+  border: 2px solid transparent !important;
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0) !important;
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: "►";
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: "▼";
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: "(";
+}
+
+.xr-dim-list:after {
+  content: ")";
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ",";
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  border-color: var(--xr-background-color-row-odd);
+  margin-bottom: 0;
+  padding-top: 2px;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+  border-color: var(--xr-background-color-row-even);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  border-top: 2px dotted var(--xr-background-color);
+  padding-bottom: 20px !important;
+  padding-top: 10px !important;
+}
+
+.xr-var-attrs-in + label,
+.xr-var-data-in + label,
+.xr-index-data-in + label {
+  padding: 0 1px;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-data > pre,
+.xr-index-data > pre,
+.xr-var-data > table > tbody > tr {
+  background-color: transparent !important;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.xr-var-attrs-in:checked + label > .xr-icon-file-text2,
+.xr-var-data-in:checked + label > .xr-icon-database,
+.xr-index-data-in:checked + label > .xr-icon-database {
+  color: var(--xr-font-color0);
+  filter: drop-shadow(1px 1px 5px var(--xr-font-color2));
+  stroke-width: 0.8px;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 2GB
+Dimensions:    (time: 88, bands: 4, cells: 676289)
+Coordinates:
+  * bands      (bands) &lt;U3 48B &#x27;b02&#x27; &#x27;b03&#x27; &#x27;b04&#x27; &#x27;b08&#x27;
+  * cell_ids   (cells) int64 5MB dask.array&lt;chunksize=(676289,), meta=np.ndarray&gt;
+  * time       (time) datetime64[ns] 704B 2019-07-29T10:30:31 ... 2022-08-12T...
+Dimensions without coordinates: cells
+Data variables:
+    Sentinel2  (time, bands, cells) float64 2GB dask.array&lt;chunksize=(1, 4, 676289), meta=np.ndarray&gt;
+Indexes:
+    cell_ids  HealpixIndex(level=19, indexing_scheme=nested)</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-2b3447d1-5b19-49ab-bb97-e60b779cbb3d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-2b3447d1-5b19-49ab-bb97-e60b779cbb3d' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 88</li><li><span class='xr-has-index'>bands</span>: 4</li><li><span class='xr-has-index'>cells</span>: 676289</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-e11c51a4-c342-4e07-b4bd-327ac9aeadf1' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e11c51a4-c342-4e07-b4bd-327ac9aeadf1' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>bands</span></div><div class='xr-var-dims'>(bands)</div><div class='xr-var-dtype'>&lt;U3</div><div class='xr-var-preview xr-preview'>&#x27;b02&#x27; &#x27;b03&#x27; &#x27;b04&#x27; &#x27;b08&#x27;</div><input id='attrs-381184d7-bc0a-46db-a49d-ddc5d05dd9d6' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-381184d7-bc0a-46db-a49d-ddc5d05dd9d6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7b69e8a4-82df-4e53-a16d-aca468d1d27f' class='xr-var-data-in' type='checkbox'><label for='data-7b69e8a4-82df-4e53-a16d-aca468d1d27f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;b02&#x27;, &#x27;b03&#x27;, &#x27;b04&#x27;, &#x27;b08&#x27;], dtype=&#x27;&lt;U3&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>cell_ids</span></div><div class='xr-var-dims'>(cells)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(676289,), meta=np.ndarray&gt;</div><input id='attrs-961f8c4f-7ce5-48a9-bc20-5912828be776' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-961f8c4f-7ce5-48a9-bc20-5912828be776' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4f38694a-0cd5-46ad-979b-79898f2ba19e' class='xr-var-data-in' type='checkbox'><label for='data-4f38694a-0cd5-46ad-979b-79898f2ba19e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_name :</span></dt><dd>healpix</dd><dt><span>nest :</span></dt><dd>True</dd><dt><span>nside :</span></dt><dd>524288</dd></dl></div><div class='xr-var-data'><table>
+    <tr>
+        <td>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 5.16 MiB </td>
+                        <td> 5.16 MiB </td>
+                    </tr>
+                    
+                    <tr>
+                        <th> Shape </th>
+                        <td> (676289,) </td>
+                        <td> (676289,) </td>
+                    </tr>
+                    <tr>
+                        <th> Dask graph </th>
+                        <td colspan="2"> 1 chunks in 2 graph layers </td>
+                    </tr>
+                    <tr>
+                        <th> Data type </th>
+                        <td colspan="2"> int64 numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="170" height="75" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="0" y1="0" x2="120" y2="0" style="stroke-width:2" />
+  <line x1="0" y1="25" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="0" y1="0" x2="0" y2="25" style="stroke-width:2" />
+  <line x1="120" y1="0" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="0.0,0.0 120.0,0.0 120.0,25.412616514582485 0.0,25.412616514582485" style="fill:#ECB172A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="60.000000" y="45.412617" font-size="1.0rem" font-weight="100" text-anchor="middle" >676289</text>
+  <text x="140.000000" y="12.706308" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(0,140.000000,12.706308)">1</text>
+</svg>
+        </td>
+    </tr>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-07-29T10:30:31 ... 2022-08-...</div><input id='attrs-c26e53ef-147b-43ba-8b01-b2f3c62ef218' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c26e53ef-147b-43ba-8b01-b2f3c62ef218' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-44778ee1-e7d3-4d3b-aa03-4ca3c9c299c5' class='xr-var-data-in' type='checkbox'><label for='data-44778ee1-e7d3-4d3b-aa03-4ca3c9c299c5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-07-29T10:30:31.000000000&#x27;, &#x27;2040-07-25T10:26:01.623774720&#x27;,
+       &#x27;1941-02-23T11:42:20.495119872&#x27;, &#x27;2067-11-25T12:07:46.785568256&#x27;,
+       &#x27;1968-06-25T13:24:05.656913408&#x27;, &#x27;2095-03-27T13:49:31.947361792&#x27;,
+       &#x27;1995-10-26T15:05:50.818706944&#x27;, &#x27;2122-07-28T15:31:17.109155328&#x27;,
+       &#x27;2023-02-25T16:47:35.980500480&#x27;, &#x27;2149-11-27T17:13:02.270948864&#x27;,
+       &#x27;2050-06-27T18:29:21.142294016&#x27;, &#x27;2177-03-29T18:54:47.432742400&#x27;,
+       &#x27;2077-10-27T20:11:06.304087552&#x27;, &#x27;2204-07-30T20:36:32.594535936&#x27;,
+       &#x27;2105-02-27T21:52:51.465881088&#x27;, &#x27;2231-11-30T22:18:17.756329472&#x27;,
+       &#x27;2132-06-29T23:34:36.627674624&#x27;, &#x27;2259-04-02T00:00:02.918123008&#x27;,
+       &#x27;2159-10-31T01:16:21.789468160&#x27;, &#x27;1810-08-04T10:30:31.000000000&#x27;,
+       &#x27;1882-11-14T02:01:45.191032320&#x27;, &#x27;1850-01-06T10:30:31.000000000&#x27;,
+       &#x27;2019-06-19T10:30:31.000000000&#x27;, &#x27;1889-06-10T10:30:31.000000000&#x27;,
+       &#x27;2019-06-29T10:30:31.000000000&#x27;, &#x27;1928-11-13T10:30:31.000000000&#x27;,
+       &#x27;2019-07-09T10:30:31.000000000&#x27;, &#x27;1968-04-17T10:30:31.000000000&#x27;,
+       &#x27;2019-07-19T10:30:31.000000000&#x27;, &#x27;2007-09-20T10:30:31.000000000&#x27;,
+       &#x27;2019-07-29T10:30:31.000000000&#x27;, &#x27;2047-02-22T10:30:31.000000000&#x27;,
+       &#x27;2019-08-08T10:30:31.000000000&#x27;, &#x27;2086-07-27T10:30:31.000000000&#x27;,
+       &#x27;2019-08-18T10:30:31.000000000&#x27;, &#x27;2125-12-30T10:30:31.000000000&#x27;,
+       &#x27;2101-07-21T15:35:46.485380608&#x27;, &#x27;2020-06-03T10:30:31.000000000&#x27;,
+       &#x27;2100-03-28T11:21:23.580896768&#x27;, &#x27;2020-06-13T10:30:31.000000000&#x27;,
+       &#x27;2139-08-31T11:21:23.580896768&#x27;, &#x27;2020-06-23T10:30:31.000000000&#x27;,
+       &#x27;2179-02-02T11:21:23.580896768&#x27;, &#x27;2020-07-03T10:30:31.000000000&#x27;,
+       &#x27;2218-07-08T11:21:23.580896768&#x27;, &#x27;2020-07-13T10:30:31.000000000&#x27;,
+       &#x27;2257-12-10T11:21:23.580896768&#x27;, &#x27;2020-07-23T10:30:31.000000000&#x27;,
+       &#x27;1712-10-24T11:46:49.871345152&#x27;, &#x27;2020-08-02T10:30:31.000000000&#x27;,
+       &#x27;1752-03-28T11:46:49.871345152&#x27;, &#x27;2020-08-12T10:30:31.000000000&#x27;,
+       &#x27;1791-08-31T11:46:49.871345152&#x27;, &#x27;2020-08-22T10:30:31.000000000&#x27;,
+       &#x27;1831-02-03T11:46:49.871345152&#x27;, &#x27;1997-12-10T06:40:34.582857216&#x27;,
+       &#x27;2124-09-11T07:06:00.873305600&#x27;, &#x27;2025-04-11T08:22:19.744650752&#x27;,
+       &#x27;2152-01-12T08:47:46.035099136&#x27;, &#x27;2052-08-11T10:04:04.906444288&#x27;,
+       &#x27;2179-05-14T10:29:31.196892672&#x27;, &#x27;1884-03-08T12:37:42.452241920&#x27;,
+       &#x27;2021-07-08T10:30:31.000000000&#x27;, &#x27;1923-08-12T12:37:42.452241920&#x27;,
+       &#x27;2021-07-18T10:30:31.000000000&#x27;, &#x27;1963-01-14T12:37:42.452241920&#x27;,
+       &#x27;2021-07-28T10:30:31.000000000&#x27;, &#x27;2002-06-18T12:37:42.452241920&#x27;,
+       &#x27;2021-08-07T10:30:31.000000000&#x27;, &#x27;2041-11-20T12:37:42.452241920&#x27;,
+       &#x27;1731-06-28T19:23:43.296308736&#x27;, &#x27;2081-04-24T12:37:42.452241920&#x27;,
+       &#x27;1758-10-28T21:05:28.458102272&#x27;, &#x27;1938-12-24T20:59:59.278769664&#x27;,
+       &#x27;1839-07-24T22:16:18.150114816&#x27;, &#x27;2022-06-13T10:30:31.000000000&#x27;,
+       &#x27;1867-08-20T23:58:03.311908352&#x27;, &#x27;2022-06-23T10:30:31.000000000&#x27;,
+       &#x27;1894-12-21T01:39:48.473701888&#x27;, &#x27;2020-12-26T02:05:14.764150272&#x27;,
+       &#x27;1921-07-27T03:21:33.635495424&#x27;, &#x27;2049-01-22T03:46:59.925943808&#x27;,
+       &#x27;1948-11-26T05:03:18.797288960&#x27;, &#x27;2075-08-28T05:28:45.087737344&#x27;,
+       &#x27;1976-03-28T06:45:03.959082496&#x27;, &#x27;2102-12-29T07:10:30.249530880&#x27;,
+       &#x27;2004-04-24T08:26:49.120876032&#x27;, &#x27;2022-08-12T10:30:31.000000000&#x27;],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d82cc360-d294-40f5-938b-2d4fe01e6477' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d82cc360-d294-40f5-938b-2d4fe01e6477' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>Sentinel2</span></div><div class='xr-var-dims'>(time, bands, cells)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(1, 4, 676289), meta=np.ndarray&gt;</div><input id='attrs-a13ccdac-709c-4c6a-b409-3745fe635bf6' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a13ccdac-709c-4c6a-b409-3745fe635bf6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-93172e34-81b1-4dcf-8b1c-2eac60c22c09' class='xr-var-data-in' type='checkbox'><label for='data-93172e34-81b1-4dcf-8b1c-2eac60c22c09' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><table>
+    <tr>
+        <td>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 1.77 GiB </td>
+                        <td> 20.64 MiB </td>
+                    </tr>
+                    
+                    <tr>
+                        <th> Shape </th>
+                        <td> (88, 4, 676289) </td>
+                        <td> (1, 4, 676289) </td>
+                    </tr>
+                    <tr>
+                        <th> Dask graph </th>
+                        <td colspan="2"> 88 chunks in 2 graph layers </td>
+                    </tr>
+                    <tr>
+                        <th> Data type </th>
+                        <td colspan="2"> float64 numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="194" height="90" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="10" y1="0" x2="24" y2="14" style="stroke-width:2" />
+  <line x1="10" y1="25" x2="24" y2="40" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="10" y1="0" x2="10" y2="25" style="stroke-width:2" />
+  <line x1="10" y1="0" x2="10" y2="26" />
+  <line x1="11" y1="1" x2="11" y2="26" />
+  <line x1="12" y1="2" x2="12" y2="27" />
+  <line x1="13" y1="3" x2="13" y2="28" />
+  <line x1="13" y1="3" x2="13" y2="29" />
+  <line x1="14" y1="4" x2="14" y2="29" />
+  <line x1="15" y1="5" x2="15" y2="30" />
+  <line x1="16" y1="6" x2="16" y2="31" />
+  <line x1="16" y1="6" x2="16" y2="32" />
+  <line x1="17" y1="7" x2="17" y2="33" />
+  <line x1="18" y1="8" x2="18" y2="33" />
+  <line x1="19" y1="9" x2="19" y2="34" />
+  <line x1="20" y1="10" x2="20" y2="35" />
+  <line x1="20" y1="10" x2="20" y2="36" />
+  <line x1="21" y1="11" x2="21" y2="37" />
+  <line x1="22" y1="12" x2="22" y2="37" />
+  <line x1="23" y1="13" x2="23" y2="38" />
+  <line x1="24" y1="14" x2="24" y2="39" />
+  <line x1="24" y1="14" x2="24" y2="40" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="10.0,0.0 24.9485979497544,14.948597949754403 24.9485979497544,40.36121446433689 10.0,25.412616514582485" style="fill:#8B4903A0;stroke-width:0"/>
+
+  <!-- Horizontal lines -->
+  <line x1="10" y1="0" x2="130" y2="0" style="stroke-width:2" />
+  <line x1="10" y1="0" x2="130" y2="0" />
+  <line x1="11" y1="1" x2="131" y2="1" />
+  <line x1="12" y1="2" x2="132" y2="2" />
+  <line x1="13" y1="3" x2="133" y2="3" />
+  <line x1="13" y1="3" x2="133" y2="3" />
+  <line x1="14" y1="4" x2="134" y2="4" />
+  <line x1="15" y1="5" x2="135" y2="5" />
+  <line x1="16" y1="6" x2="136" y2="6" />
+  <line x1="16" y1="6" x2="136" y2="6" />
+  <line x1="17" y1="7" x2="137" y2="7" />
+  <line x1="18" y1="8" x2="138" y2="8" />
+  <line x1="19" y1="9" x2="139" y2="9" />
+  <line x1="20" y1="10" x2="140" y2="10" />
+  <line x1="20" y1="10" x2="140" y2="10" />
+  <line x1="21" y1="11" x2="141" y2="11" />
+  <line x1="22" y1="12" x2="142" y2="12" />
+  <line x1="23" y1="13" x2="143" y2="13" />
+  <line x1="24" y1="14" x2="144" y2="14" />
+  <line x1="24" y1="14" x2="144" y2="14" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="10" y1="0" x2="24" y2="14" style="stroke-width:2" />
+  <line x1="130" y1="0" x2="144" y2="14" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="10.0,0.0 130.0,0.0 144.9485979497544,14.948597949754403 24.9485979497544,14.948597949754403" style="fill:#8B4903A0;stroke-width:0"/>
+
+  <!-- Horizontal lines -->
+  <line x1="24" y1="14" x2="144" y2="14" style="stroke-width:2" />
+  <line x1="24" y1="40" x2="144" y2="40" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="24" y1="14" x2="24" y2="40" style="stroke-width:2" />
+  <line x1="144" y1="14" x2="144" y2="40" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="24.9485979497544,14.948597949754403 144.9485979497544,14.948597949754403 144.9485979497544,40.36121446433689 24.9485979497544,40.36121446433689" style="fill:#ECB172A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="84.948598" y="60.361214" font-size="1.0rem" font-weight="100" text-anchor="middle" >676289</text>
+  <text x="164.948598" y="27.654906" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(0,164.948598,27.654906)">4</text>
+  <text x="7.474299" y="52.886915" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(45,7.474299,52.886915)">88</text>
+</svg>
+        </td>
+    </tr>
+</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-f53ba424-901b-44f6-8ef3-cc10eb63c959' class='xr-section-summary-in' type='checkbox'  ><label for='section-f53ba424-901b-44f6-8ef3-cc10eb63c959' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>bands</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-e3924729-6d48-4d72-8d00-5441c5f0921e' class='xr-index-data-in' type='checkbox'/><label for='index-e3924729-6d48-4d72-8d00-5441c5f0921e' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([&#x27;b02&#x27;, &#x27;b03&#x27;, &#x27;b04&#x27;, &#x27;b08&#x27;], dtype=&#x27;object&#x27;, name=&#x27;bands&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-4c7c13b8-b02d-45cd-9c22-d5458a21b107' class='xr-index-data-in' type='checkbox'/><label for='index-4c7c13b8-b02d-45cd-9c22-d5458a21b107' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(CFTimeIndex([2019-07-29 10:30:31, -97334-05-18 10:30:31, -95680-08-15 10:30:31,
+             -94969-12-06 10:30:31, -93314-03-04 10:30:31, -92603-06-24 10:30:31,
+             -90949-09-22 10:30:31, -90237-01-12 10:30:31, -88583-04-11 10:30:31,
+             -87872-08-01 10:30:31, -86218-10-29 10:30:31, -85506-02-18 10:30:31,
+             -83852-05-18 10:30:31, -83141-09-08 10:30:31, -81487-12-06 10:30:31,
+             -80775-03-28 10:30:31, -79121-06-25 10:30:31, -78410-10-16 10:30:31,
+             -76755-01-12 10:30:31, 1810-08-04 10:30:31, -9809-10-15 10:30:31,
+             1850-01-06 10:30:31, 2019-06-19 10:30:31, 1889-06-10 10:30:31,
+             2019-06-29 10:30:31, 1928-11-13 10:30:31, 2019-07-09 10:30:31,
+             1968-04-17 10:30:31, 2019-07-19 10:30:31, 2007-09-20 10:30:31,
+             2019-07-29 10:30:31, 2047-02-22 10:30:31, 2019-08-08 10:30:31,
+             2086-07-27 10:30:31, 2019-08-18 10:30:31, 2125-12-30 10:30:31,
+             9116-03-15 10:30:31, 2020-06-03 10:30:31, 3269-05-06 10:30:31,
+             2020-06-13 10:30:31, 3308-10-09 10:30:31, 2020-06-23 10:30:31,
+             3348-03-13 10:30:31, 2020-07-03 10:30:31, 3387-08-16 10:30:31,
+             2020-07-13 10:30:31, 3427-01-19 10:30:31, 2020-07-23 10:30:31,
+             3466-06-23 10:30:31, 2020-08-02 10:30:31, 3505-11-26 10:30:31,
+             2020-08-12 10:30:31, 3545-04-30 10:30:31, 2020-08-22 10:30:31,
+             3584-10-02 10:30:31, 162165-10-01 10:30:31, 162877-01-21 10:30:31,
+             164531-04-21 10:30:31, 165242-08-11 10:30:31, 166896-11-07 10:30:31,
+             167608-02-29 10:30:31, 4806-12-15 10:30:31, 2021-07-08 10:30:31,
+             4846-05-19 10:30:31, 2021-07-18 10:30:31, 4885-10-21 10:30:31,
+             2021-07-28 10:30:31, 4925-03-26 10:30:31, 2021-08-07 10:30:31,
+             4964-08-28 10:30:31, 179435-12-03 10:30:31, 5004-02-01 10:30:31,
+             181801-06-22 10:30:31, 248036-03-26 10:30:31, 249690-06-23 10:30:31,
+             2022-06-13 10:30:31, 252056-10-07 10:30:31, 2022-06-23 10:30:31,
+             254422-04-27 10:30:31, 255132-11-21 10:30:31, 256787-02-18 10:30:31,
+             257499-03-07 10:30:31, 259152-09-07 10:30:31, 259863-12-29 10:30:31,
+             261518-03-28 10:30:31, 262229-07-18 10:30:31, 263884-07-11 10:30:31,
+             2022-08-12 10:30:31],
+            dtype=&#x27;object&#x27;,
+            length=88,
+            calendar=&#x27;proleptic_gregorian&#x27;,
+            freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>cell_ids</div></div><div class='xr-index-preview'>HealpixIndex(level=19, indexing_scheme=nested)</div><input type='checkbox' disabled/><label></label><input id='index-c13afcaa-c21e-47a3-b530-bd7c980bd51d' class='xr-index-data-in' type='checkbox'/><label for='index-c13afcaa-c21e-47a3-b530-bd7c980bd51d' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>&lt;xdggs.healpix.HealpixIndex object at 0x16d6de3c0&gt;</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-98dfcaf7-a38f-4efc-9856-eb6b15ecaef8' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-98dfcaf7-a38f-4efc-9856-eb6b15ecaef8' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dtotal</span><span class="o">=</span><span class="n">dtotal</span><span class="o">.</span><span class="n">assign_coords</span><span class="p">(</span>
+    <span class="n">dtotal</span><span class="o">.</span><span class="n">dggs</span><span class="o">.</span><span class="n">cell_centers</span><span class="p">()</span><span class="o">.</span><span class="n">coords</span>
+<span class="p">)</span>
+<span class="n">dtotal</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base rgba(0, 0, 0, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, white)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 15))
+  );
+}
+
+html[theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
+body.vscode-dark {
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base, rgba(255, 255, 255, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, #111111)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 15))
+  );
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: inline-block;
+  opacity: 0;
+  height: 0;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+  border: 2px solid transparent !important;
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0) !important;
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: "►";
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: "▼";
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: "(";
+}
+
+.xr-dim-list:after {
+  content: ")";
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ",";
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  border-color: var(--xr-background-color-row-odd);
+  margin-bottom: 0;
+  padding-top: 2px;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+  border-color: var(--xr-background-color-row-even);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  border-top: 2px dotted var(--xr-background-color);
+  padding-bottom: 20px !important;
+  padding-top: 10px !important;
+}
+
+.xr-var-attrs-in + label,
+.xr-var-data-in + label,
+.xr-index-data-in + label {
+  padding: 0 1px;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-data > pre,
+.xr-index-data > pre,
+.xr-var-data > table > tbody > tr {
+  background-color: transparent !important;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.xr-var-attrs-in:checked + label > .xr-icon-file-text2,
+.xr-var-data-in:checked + label > .xr-icon-database,
+.xr-index-data-in:checked + label > .xr-icon-database {
+  color: var(--xr-font-color0);
+  filter: drop-shadow(1px 1px 5px var(--xr-font-color2));
+  stroke-width: 0.8px;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 2GB
+Dimensions:    (time: 88, bands: 4, cells: 676289)
+Coordinates:
+  * bands      (bands) &lt;U3 48B &#x27;b02&#x27; &#x27;b03&#x27; &#x27;b04&#x27; &#x27;b08&#x27;
+  * cell_ids   (cells) int64 5MB dask.array&lt;chunksize=(676289,), meta=np.ndarray&gt;
+  * time       (time) datetime64[ns] 704B 2019-07-29T10:30:31 ... 2022-08-12T...
+    latitude   (cells) float64 5MB 52.25 52.25 52.25 52.25 ... 52.34 52.34 52.34
+    longitude  (cells) float64 5MB 10.59 10.59 10.59 10.59 ... 10.51 10.51 10.51
+Dimensions without coordinates: cells
+Data variables:
+    Sentinel2  (time, bands, cells) float64 2GB dask.array&lt;chunksize=(1, 4, 676289), meta=np.ndarray&gt;
+Indexes:
+    cell_ids  HealpixIndex(level=19, indexing_scheme=nested)</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-a8293fc4-d43d-4f18-a5b7-1262dd7d6a6d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-a8293fc4-d43d-4f18-a5b7-1262dd7d6a6d' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 88</li><li><span class='xr-has-index'>bands</span>: 4</li><li><span class='xr-has-index'>cells</span>: 676289</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-1f247fe5-d8c4-4d9c-b382-9eb4b0b75007' class='xr-section-summary-in' type='checkbox'  checked><label for='section-1f247fe5-d8c4-4d9c-b382-9eb4b0b75007' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>bands</span></div><div class='xr-var-dims'>(bands)</div><div class='xr-var-dtype'>&lt;U3</div><div class='xr-var-preview xr-preview'>&#x27;b02&#x27; &#x27;b03&#x27; &#x27;b04&#x27; &#x27;b08&#x27;</div><input id='attrs-d4e79a74-a3bd-4735-84d6-2d617a634a0c' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d4e79a74-a3bd-4735-84d6-2d617a634a0c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7381d092-0718-4fda-8f3c-4fbd56b2b16c' class='xr-var-data-in' type='checkbox'><label for='data-7381d092-0718-4fda-8f3c-4fbd56b2b16c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;b02&#x27;, &#x27;b03&#x27;, &#x27;b04&#x27;, &#x27;b08&#x27;], dtype=&#x27;&lt;U3&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>cell_ids</span></div><div class='xr-var-dims'>(cells)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(676289,), meta=np.ndarray&gt;</div><input id='attrs-67b45eb4-6661-4c66-bbcb-6791a04ddb08' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-67b45eb4-6661-4c66-bbcb-6791a04ddb08' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8af725c5-6d85-4e2d-b2e6-eb0d11b64bf7' class='xr-var-data-in' type='checkbox'><label for='data-8af725c5-6d85-4e2d-b2e6-eb0d11b64bf7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_name :</span></dt><dd>healpix</dd><dt><span>nest :</span></dt><dd>True</dd><dt><span>nside :</span></dt><dd>524288</dd></dl></div><div class='xr-var-data'><table>
+    <tr>
+        <td>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 5.16 MiB </td>
+                        <td> 5.16 MiB </td>
+                    </tr>
+                    
+                    <tr>
+                        <th> Shape </th>
+                        <td> (676289,) </td>
+                        <td> (676289,) </td>
+                    </tr>
+                    <tr>
+                        <th> Dask graph </th>
+                        <td colspan="2"> 1 chunks in 2 graph layers </td>
+                    </tr>
+                    <tr>
+                        <th> Data type </th>
+                        <td colspan="2"> int64 numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="170" height="75" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="0" y1="0" x2="120" y2="0" style="stroke-width:2" />
+  <line x1="0" y1="25" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="0" y1="0" x2="0" y2="25" style="stroke-width:2" />
+  <line x1="120" y1="0" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="0.0,0.0 120.0,0.0 120.0,25.412616514582485 0.0,25.412616514582485" style="fill:#ECB172A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="60.000000" y="45.412617" font-size="1.0rem" font-weight="100" text-anchor="middle" >676289</text>
+  <text x="140.000000" y="12.706308" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(0,140.000000,12.706308)">1</text>
+</svg>
+        </td>
+    </tr>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-07-29T10:30:31 ... 2022-08-...</div><input id='attrs-ee9f503b-b51f-458e-923f-79c8fc1cebfe' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ee9f503b-b51f-458e-923f-79c8fc1cebfe' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-dec33d0f-aa1b-4e56-9d76-4172a16acb17' class='xr-var-data-in' type='checkbox'><label for='data-dec33d0f-aa1b-4e56-9d76-4172a16acb17' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-07-29T10:30:31.000000000&#x27;, &#x27;2040-07-25T10:26:01.623774720&#x27;,
+       &#x27;1941-02-23T11:42:20.495119872&#x27;, &#x27;2067-11-25T12:07:46.785568256&#x27;,
+       &#x27;1968-06-25T13:24:05.656913408&#x27;, &#x27;2095-03-27T13:49:31.947361792&#x27;,
+       &#x27;1995-10-26T15:05:50.818706944&#x27;, &#x27;2122-07-28T15:31:17.109155328&#x27;,
+       &#x27;2023-02-25T16:47:35.980500480&#x27;, &#x27;2149-11-27T17:13:02.270948864&#x27;,
+       &#x27;2050-06-27T18:29:21.142294016&#x27;, &#x27;2177-03-29T18:54:47.432742400&#x27;,
+       &#x27;2077-10-27T20:11:06.304087552&#x27;, &#x27;2204-07-30T20:36:32.594535936&#x27;,
+       &#x27;2105-02-27T21:52:51.465881088&#x27;, &#x27;2231-11-30T22:18:17.756329472&#x27;,
+       &#x27;2132-06-29T23:34:36.627674624&#x27;, &#x27;2259-04-02T00:00:02.918123008&#x27;,
+       &#x27;2159-10-31T01:16:21.789468160&#x27;, &#x27;1810-08-04T10:30:31.000000000&#x27;,
+       &#x27;1882-11-14T02:01:45.191032320&#x27;, &#x27;1850-01-06T10:30:31.000000000&#x27;,
+       &#x27;2019-06-19T10:30:31.000000000&#x27;, &#x27;1889-06-10T10:30:31.000000000&#x27;,
+       &#x27;2019-06-29T10:30:31.000000000&#x27;, &#x27;1928-11-13T10:30:31.000000000&#x27;,
+       &#x27;2019-07-09T10:30:31.000000000&#x27;, &#x27;1968-04-17T10:30:31.000000000&#x27;,
+       &#x27;2019-07-19T10:30:31.000000000&#x27;, &#x27;2007-09-20T10:30:31.000000000&#x27;,
+       &#x27;2019-07-29T10:30:31.000000000&#x27;, &#x27;2047-02-22T10:30:31.000000000&#x27;,
+       &#x27;2019-08-08T10:30:31.000000000&#x27;, &#x27;2086-07-27T10:30:31.000000000&#x27;,
+       &#x27;2019-08-18T10:30:31.000000000&#x27;, &#x27;2125-12-30T10:30:31.000000000&#x27;,
+       &#x27;2101-07-21T15:35:46.485380608&#x27;, &#x27;2020-06-03T10:30:31.000000000&#x27;,
+       &#x27;2100-03-28T11:21:23.580896768&#x27;, &#x27;2020-06-13T10:30:31.000000000&#x27;,
+       &#x27;2139-08-31T11:21:23.580896768&#x27;, &#x27;2020-06-23T10:30:31.000000000&#x27;,
+       &#x27;2179-02-02T11:21:23.580896768&#x27;, &#x27;2020-07-03T10:30:31.000000000&#x27;,
+       &#x27;2218-07-08T11:21:23.580896768&#x27;, &#x27;2020-07-13T10:30:31.000000000&#x27;,
+       &#x27;2257-12-10T11:21:23.580896768&#x27;, &#x27;2020-07-23T10:30:31.000000000&#x27;,
+       &#x27;1712-10-24T11:46:49.871345152&#x27;, &#x27;2020-08-02T10:30:31.000000000&#x27;,
+       &#x27;1752-03-28T11:46:49.871345152&#x27;, &#x27;2020-08-12T10:30:31.000000000&#x27;,
+       &#x27;1791-08-31T11:46:49.871345152&#x27;, &#x27;2020-08-22T10:30:31.000000000&#x27;,
+       &#x27;1831-02-03T11:46:49.871345152&#x27;, &#x27;1997-12-10T06:40:34.582857216&#x27;,
+       &#x27;2124-09-11T07:06:00.873305600&#x27;, &#x27;2025-04-11T08:22:19.744650752&#x27;,
+       &#x27;2152-01-12T08:47:46.035099136&#x27;, &#x27;2052-08-11T10:04:04.906444288&#x27;,
+       &#x27;2179-05-14T10:29:31.196892672&#x27;, &#x27;1884-03-08T12:37:42.452241920&#x27;,
+       &#x27;2021-07-08T10:30:31.000000000&#x27;, &#x27;1923-08-12T12:37:42.452241920&#x27;,
+       &#x27;2021-07-18T10:30:31.000000000&#x27;, &#x27;1963-01-14T12:37:42.452241920&#x27;,
+       &#x27;2021-07-28T10:30:31.000000000&#x27;, &#x27;2002-06-18T12:37:42.452241920&#x27;,
+       &#x27;2021-08-07T10:30:31.000000000&#x27;, &#x27;2041-11-20T12:37:42.452241920&#x27;,
+       &#x27;1731-06-28T19:23:43.296308736&#x27;, &#x27;2081-04-24T12:37:42.452241920&#x27;,
+       &#x27;1758-10-28T21:05:28.458102272&#x27;, &#x27;1938-12-24T20:59:59.278769664&#x27;,
+       &#x27;1839-07-24T22:16:18.150114816&#x27;, &#x27;2022-06-13T10:30:31.000000000&#x27;,
+       &#x27;1867-08-20T23:58:03.311908352&#x27;, &#x27;2022-06-23T10:30:31.000000000&#x27;,
+       &#x27;1894-12-21T01:39:48.473701888&#x27;, &#x27;2020-12-26T02:05:14.764150272&#x27;,
+       &#x27;1921-07-27T03:21:33.635495424&#x27;, &#x27;2049-01-22T03:46:59.925943808&#x27;,
+       &#x27;1948-11-26T05:03:18.797288960&#x27;, &#x27;2075-08-28T05:28:45.087737344&#x27;,
+       &#x27;1976-03-28T06:45:03.959082496&#x27;, &#x27;2102-12-29T07:10:30.249530880&#x27;,
+       &#x27;2004-04-24T08:26:49.120876032&#x27;, &#x27;2022-08-12T10:30:31.000000000&#x27;],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>latitude</span></div><div class='xr-var-dims'>(cells)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>52.25 52.25 52.25 ... 52.34 52.34</div><input id='attrs-a3eb5c0b-0920-4d40-9be2-b15cf0a9b0ca' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a3eb5c0b-0920-4d40-9be2-b15cf0a9b0ca' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3f91a134-aba6-489a-bbb7-ecd6c59c5e08' class='xr-var-data-in' type='checkbox'><label for='data-3f91a134-aba6-489a-bbb7-ecd6c59c5e08' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([52.24772734, 52.24772734, 52.24772734, ..., 52.34069494,
+       52.34078922, 52.34078922], shape=(676289,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>longitude</span></div><div class='xr-var-dims'>(cells)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>10.59 10.59 10.59 ... 10.51 10.51</div><input id='attrs-61a73d19-9adf-4fb5-9d7a-e23cb7a60880' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-61a73d19-9adf-4fb5-9d7a-e23cb7a60880' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4481254d-8084-44ab-abfb-ad6753705bc3' class='xr-var-data-in' type='checkbox'><label for='data-4481254d-8084-44ab-abfb-ad6753705bc3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([10.59005105, 10.58918458, 10.58961782, ..., 10.51253936,
+       10.51256472, 10.51234759], shape=(676289,))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-657176c5-d422-40ed-9798-052104f92196' class='xr-section-summary-in' type='checkbox'  checked><label for='section-657176c5-d422-40ed-9798-052104f92196' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>Sentinel2</span></div><div class='xr-var-dims'>(time, bands, cells)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(1, 4, 676289), meta=np.ndarray&gt;</div><input id='attrs-0aed6b91-19e1-47c1-ada8-a3ca2fdb8765' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0aed6b91-19e1-47c1-ada8-a3ca2fdb8765' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c5b42802-0733-474b-96c6-fc491bbbb3fd' class='xr-var-data-in' type='checkbox'><label for='data-c5b42802-0733-474b-96c6-fc491bbbb3fd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><table>
+    <tr>
+        <td>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 1.77 GiB </td>
+                        <td> 20.64 MiB </td>
+                    </tr>
+                    
+                    <tr>
+                        <th> Shape </th>
+                        <td> (88, 4, 676289) </td>
+                        <td> (1, 4, 676289) </td>
+                    </tr>
+                    <tr>
+                        <th> Dask graph </th>
+                        <td colspan="2"> 88 chunks in 2 graph layers </td>
+                    </tr>
+                    <tr>
+                        <th> Data type </th>
+                        <td colspan="2"> float64 numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="194" height="90" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="10" y1="0" x2="24" y2="14" style="stroke-width:2" />
+  <line x1="10" y1="25" x2="24" y2="40" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="10" y1="0" x2="10" y2="25" style="stroke-width:2" />
+  <line x1="10" y1="0" x2="10" y2="26" />
+  <line x1="11" y1="1" x2="11" y2="26" />
+  <line x1="12" y1="2" x2="12" y2="27" />
+  <line x1="13" y1="3" x2="13" y2="28" />
+  <line x1="13" y1="3" x2="13" y2="29" />
+  <line x1="14" y1="4" x2="14" y2="29" />
+  <line x1="15" y1="5" x2="15" y2="30" />
+  <line x1="16" y1="6" x2="16" y2="31" />
+  <line x1="16" y1="6" x2="16" y2="32" />
+  <line x1="17" y1="7" x2="17" y2="33" />
+  <line x1="18" y1="8" x2="18" y2="33" />
+  <line x1="19" y1="9" x2="19" y2="34" />
+  <line x1="20" y1="10" x2="20" y2="35" />
+  <line x1="20" y1="10" x2="20" y2="36" />
+  <line x1="21" y1="11" x2="21" y2="37" />
+  <line x1="22" y1="12" x2="22" y2="37" />
+  <line x1="23" y1="13" x2="23" y2="38" />
+  <line x1="24" y1="14" x2="24" y2="39" />
+  <line x1="24" y1="14" x2="24" y2="40" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="10.0,0.0 24.9485979497544,14.948597949754403 24.9485979497544,40.36121446433689 10.0,25.412616514582485" style="fill:#8B4903A0;stroke-width:0"/>
+
+  <!-- Horizontal lines -->
+  <line x1="10" y1="0" x2="130" y2="0" style="stroke-width:2" />
+  <line x1="10" y1="0" x2="130" y2="0" />
+  <line x1="11" y1="1" x2="131" y2="1" />
+  <line x1="12" y1="2" x2="132" y2="2" />
+  <line x1="13" y1="3" x2="133" y2="3" />
+  <line x1="13" y1="3" x2="133" y2="3" />
+  <line x1="14" y1="4" x2="134" y2="4" />
+  <line x1="15" y1="5" x2="135" y2="5" />
+  <line x1="16" y1="6" x2="136" y2="6" />
+  <line x1="16" y1="6" x2="136" y2="6" />
+  <line x1="17" y1="7" x2="137" y2="7" />
+  <line x1="18" y1="8" x2="138" y2="8" />
+  <line x1="19" y1="9" x2="139" y2="9" />
+  <line x1="20" y1="10" x2="140" y2="10" />
+  <line x1="20" y1="10" x2="140" y2="10" />
+  <line x1="21" y1="11" x2="141" y2="11" />
+  <line x1="22" y1="12" x2="142" y2="12" />
+  <line x1="23" y1="13" x2="143" y2="13" />
+  <line x1="24" y1="14" x2="144" y2="14" />
+  <line x1="24" y1="14" x2="144" y2="14" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="10" y1="0" x2="24" y2="14" style="stroke-width:2" />
+  <line x1="130" y1="0" x2="144" y2="14" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="10.0,0.0 130.0,0.0 144.9485979497544,14.948597949754403 24.9485979497544,14.948597949754403" style="fill:#8B4903A0;stroke-width:0"/>
+
+  <!-- Horizontal lines -->
+  <line x1="24" y1="14" x2="144" y2="14" style="stroke-width:2" />
+  <line x1="24" y1="40" x2="144" y2="40" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="24" y1="14" x2="24" y2="40" style="stroke-width:2" />
+  <line x1="144" y1="14" x2="144" y2="40" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="24.9485979497544,14.948597949754403 144.9485979497544,14.948597949754403 144.9485979497544,40.36121446433689 24.9485979497544,40.36121446433689" style="fill:#ECB172A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="84.948598" y="60.361214" font-size="1.0rem" font-weight="100" text-anchor="middle" >676289</text>
+  <text x="164.948598" y="27.654906" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(0,164.948598,27.654906)">4</text>
+  <text x="7.474299" y="52.886915" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(45,7.474299,52.886915)">88</text>
+</svg>
+        </td>
+    </tr>
+</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-b76f4295-3180-4991-baf9-5be1c2c8b651' class='xr-section-summary-in' type='checkbox'  ><label for='section-b76f4295-3180-4991-baf9-5be1c2c8b651' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>bands</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-602a1ba0-c186-4fb1-9739-7461986261c7' class='xr-index-data-in' type='checkbox'/><label for='index-602a1ba0-c186-4fb1-9739-7461986261c7' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([&#x27;b02&#x27;, &#x27;b03&#x27;, &#x27;b04&#x27;, &#x27;b08&#x27;], dtype=&#x27;object&#x27;, name=&#x27;bands&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-b457786a-ae82-425e-9c89-af9c9f12a416' class='xr-index-data-in' type='checkbox'/><label for='index-b457786a-ae82-425e-9c89-af9c9f12a416' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(CFTimeIndex([2019-07-29 10:30:31, -97334-05-18 10:30:31, -95680-08-15 10:30:31,
+             -94969-12-06 10:30:31, -93314-03-04 10:30:31, -92603-06-24 10:30:31,
+             -90949-09-22 10:30:31, -90237-01-12 10:30:31, -88583-04-11 10:30:31,
+             -87872-08-01 10:30:31, -86218-10-29 10:30:31, -85506-02-18 10:30:31,
+             -83852-05-18 10:30:31, -83141-09-08 10:30:31, -81487-12-06 10:30:31,
+             -80775-03-28 10:30:31, -79121-06-25 10:30:31, -78410-10-16 10:30:31,
+             -76755-01-12 10:30:31, 1810-08-04 10:30:31, -9809-10-15 10:30:31,
+             1850-01-06 10:30:31, 2019-06-19 10:30:31, 1889-06-10 10:30:31,
+             2019-06-29 10:30:31, 1928-11-13 10:30:31, 2019-07-09 10:30:31,
+             1968-04-17 10:30:31, 2019-07-19 10:30:31, 2007-09-20 10:30:31,
+             2019-07-29 10:30:31, 2047-02-22 10:30:31, 2019-08-08 10:30:31,
+             2086-07-27 10:30:31, 2019-08-18 10:30:31, 2125-12-30 10:30:31,
+             9116-03-15 10:30:31, 2020-06-03 10:30:31, 3269-05-06 10:30:31,
+             2020-06-13 10:30:31, 3308-10-09 10:30:31, 2020-06-23 10:30:31,
+             3348-03-13 10:30:31, 2020-07-03 10:30:31, 3387-08-16 10:30:31,
+             2020-07-13 10:30:31, 3427-01-19 10:30:31, 2020-07-23 10:30:31,
+             3466-06-23 10:30:31, 2020-08-02 10:30:31, 3505-11-26 10:30:31,
+             2020-08-12 10:30:31, 3545-04-30 10:30:31, 2020-08-22 10:30:31,
+             3584-10-02 10:30:31, 162165-10-01 10:30:31, 162877-01-21 10:30:31,
+             164531-04-21 10:30:31, 165242-08-11 10:30:31, 166896-11-07 10:30:31,
+             167608-02-29 10:30:31, 4806-12-15 10:30:31, 2021-07-08 10:30:31,
+             4846-05-19 10:30:31, 2021-07-18 10:30:31, 4885-10-21 10:30:31,
+             2021-07-28 10:30:31, 4925-03-26 10:30:31, 2021-08-07 10:30:31,
+             4964-08-28 10:30:31, 179435-12-03 10:30:31, 5004-02-01 10:30:31,
+             181801-06-22 10:30:31, 248036-03-26 10:30:31, 249690-06-23 10:30:31,
+             2022-06-13 10:30:31, 252056-10-07 10:30:31, 2022-06-23 10:30:31,
+             254422-04-27 10:30:31, 255132-11-21 10:30:31, 256787-02-18 10:30:31,
+             257499-03-07 10:30:31, 259152-09-07 10:30:31, 259863-12-29 10:30:31,
+             261518-03-28 10:30:31, 262229-07-18 10:30:31, 263884-07-11 10:30:31,
+             2022-08-12 10:30:31],
+            dtype=&#x27;object&#x27;,
+            length=88,
+            calendar=&#x27;proleptic_gregorian&#x27;,
+            freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>cell_ids</div></div><div class='xr-index-preview'>HealpixIndex(level=19, indexing_scheme=nested)</div><input type='checkbox' disabled/><label></label><input id='index-eb8586ec-75df-4f19-8d19-4edaea81089e' class='xr-index-data-in' type='checkbox'/><label for='index-eb8586ec-75df-4f19-8d19-4edaea81089e' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>&lt;xdggs.healpix.HealpixIndex object at 0x16fd69950&gt;</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-cb9e78eb-0bb8-478c-af91-d1232a5079cd' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-cb9e78eb-0bb8-478c-af91-d1232a5079cd' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dtotal</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">Sentinel2</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span><span class="o">.</span><span class="n">dggs</span><span class="o">.</span><span class="n">explore</span><span class="p">(</span>
+    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "98cb4f1e927d437b94b4188ad4340b30", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">latitude</span> <span class="o">=</span> <span class="mf">52.31410846097136</span>
+<span class="n">longitude</span> <span class="o">=</span> <span class="mf">10.577647748067031</span>
+
+<span class="n">point</span><span class="o">=</span><span class="n">dtotal</span><span class="o">.</span><span class="n">dggs</span><span class="o">.</span><span class="n">sel_latlon</span><span class="p">(</span>
+    <span class="n">longitude</span><span class="o">=</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="n">latitude</span>
+<span class="p">)</span><span class="o">.</span><span class="n">Sentinel2</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+<span class="n">point</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base rgba(0, 0, 0, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, white)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 15))
+  );
+}
+
+html[theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
+body.vscode-dark {
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base, rgba(255, 255, 255, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, #111111)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 15))
+  );
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: inline-block;
+  opacity: 0;
+  height: 0;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+  border: 2px solid transparent !important;
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0) !important;
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: "►";
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: "▼";
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: "(";
+}
+
+.xr-dim-list:after {
+  content: ")";
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ",";
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  border-color: var(--xr-background-color-row-odd);
+  margin-bottom: 0;
+  padding-top: 2px;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+  border-color: var(--xr-background-color-row-even);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  border-top: 2px dotted var(--xr-background-color);
+  padding-bottom: 20px !important;
+  padding-top: 10px !important;
+}
+
+.xr-var-attrs-in + label,
+.xr-var-data-in + label,
+.xr-index-data-in + label {
+  padding: 0 1px;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-data > pre,
+.xr-index-data > pre,
+.xr-var-data > table > tbody > tr {
+  background-color: transparent !important;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.xr-var-attrs-in:checked + label > .xr-icon-file-text2,
+.xr-var-data-in:checked + label > .xr-icon-database,
+.xr-index-data-in:checked + label > .xr-icon-database {
+  color: var(--xr-font-color0);
+  filter: drop-shadow(1px 1px 5px var(--xr-font-color2));
+  stroke-width: 0.8px;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray &#x27;Sentinel2&#x27; (time: 30, bands: 4, cells: 1)&gt; Size: 960B
+array([[[15440.],
+        [13400.],
+        [12112.],
+        [11128.]],
+
+       [[ 1362.],
+        [ 1384.],
+        [ 1226.],
+        [ 3876.]],
+
+       [[ 1080.],
+        [ 1269.],
+        [ 1138.],
+        [ 5136.]],
+
+       [[ 1680.],
+        [ 1612.],
+        [ 1472.],
+        [ 3134.]],
+
+...
+
+       [[ 3562.],
+        [ 3664.],
+        [ 3836.],
+        [ 5360.]],
+
+       [[12536.],
+        [11472.],
+        [10928.],
+        [10416.]],
+
+       [[ 1636.],
+        [ 1650.],
+        [ 1425.],
+        [ 3190.]],
+
+       [[ 1289.],
+        [ 1438.],
+        [ 1263.],
+        [ 4460.]]])
+Coordinates:
+  * bands      (bands) &lt;U3 48B &#x27;b02&#x27; &#x27;b03&#x27; &#x27;b04&#x27; &#x27;b08&#x27;
+  * cell_ids   (cells) int64 8B 198445532943
+  * time       (time) datetime64[ns] 240B 2019-07-29T10:30:31 ... 2007-09-20T...
+    latitude   (cells) float64 8B 52.31
+    longitude  (cells) float64 8B 10.58
+Dimensions without coordinates: cells
+Indexes:
+    cell_ids  HealpixIndex(level=19, indexing_scheme=nested)</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'Sentinel2'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 30</li><li><span class='xr-has-index'>bands</span>: 4</li><li><span class='xr-has-index'>cells</span>: 1</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-48bc97c6-e47b-4705-a0df-f6799a1b5f9c' class='xr-array-in' type='checkbox' checked><label for='section-48bc97c6-e47b-4705-a0df-f6799a1b5f9c' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>1.544e+04 1.34e+04 1.211e+04 ... 1.438e+03 1.263e+03 4.46e+03</span></div><div class='xr-array-data'><pre>array([[[15440.],
+        [13400.],
+        [12112.],
+        [11128.]],
+
+       [[ 1362.],
+        [ 1384.],
+        [ 1226.],
+        [ 3876.]],
+
+       [[ 1080.],
+        [ 1269.],
+        [ 1138.],
+        [ 5136.]],
+
+       [[ 1680.],
+        [ 1612.],
+        [ 1472.],
+        [ 3134.]],
+
+...
+
+       [[ 3562.],
+        [ 3664.],
+        [ 3836.],
+        [ 5360.]],
+
+       [[12536.],
+        [11472.],
+        [10928.],
+        [10416.]],
+
+       [[ 1636.],
+        [ 1650.],
+        [ 1425.],
+        [ 3190.]],
+
+       [[ 1289.],
+        [ 1438.],
+        [ 1263.],
+        [ 4460.]]])</pre></div></div></li><li class='xr-section-item'><input id='section-b63512fe-ce77-406f-99ab-72a711428ce7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-b63512fe-ce77-406f-99ab-72a711428ce7' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>bands</span></div><div class='xr-var-dims'>(bands)</div><div class='xr-var-dtype'>&lt;U3</div><div class='xr-var-preview xr-preview'>&#x27;b02&#x27; &#x27;b03&#x27; &#x27;b04&#x27; &#x27;b08&#x27;</div><input id='attrs-2a730ff2-2e32-4bc9-9769-f4f8966fbe75' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2a730ff2-2e32-4bc9-9769-f4f8966fbe75' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a062bd10-99c6-4285-b607-7c09f04b0641' class='xr-var-data-in' type='checkbox'><label for='data-a062bd10-99c6-4285-b607-7c09f04b0641' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;b02&#x27;, &#x27;b03&#x27;, &#x27;b04&#x27;, &#x27;b08&#x27;], dtype=&#x27;&lt;U3&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>cell_ids</span></div><div class='xr-var-dims'>(cells)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>198445532943</div><input id='attrs-4c178825-cb39-4336-91f3-9ab3d5da85ab' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4c178825-cb39-4336-91f3-9ab3d5da85ab' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cfc005cd-f94c-40b5-a222-64c9283ac885' class='xr-var-data-in' type='checkbox'><label for='data-cfc005cd-f94c-40b5-a222-64c9283ac885' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_name :</span></dt><dd>healpix</dd><dt><span>nest :</span></dt><dd>True</dd><dt><span>nside :</span></dt><dd>524288</dd></dl></div><div class='xr-var-data'><pre>array([198445532943])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-07-29T10:30:31 ... 2007-09-...</div><input id='attrs-37049975-04ac-438b-8491-95729816a9ea' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-37049975-04ac-438b-8491-95729816a9ea' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-be88a232-d3fd-41f1-beff-127068a95731' class='xr-var-data-in' type='checkbox'><label for='data-be88a232-d3fd-41f1-beff-127068a95731' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-07-29T10:30:31.000000000&#x27;, &#x27;2040-07-25T10:26:01.623774720&#x27;,
+       &#x27;1941-02-23T11:42:20.495119872&#x27;, &#x27;2067-11-25T12:07:46.785568256&#x27;,
+       &#x27;1968-06-25T13:24:05.656913408&#x27;, &#x27;2095-03-27T13:49:31.947361792&#x27;,
+       &#x27;1995-10-26T15:05:50.818706944&#x27;, &#x27;2122-07-28T15:31:17.109155328&#x27;,
+       &#x27;2023-02-25T16:47:35.980500480&#x27;, &#x27;2149-11-27T17:13:02.270948864&#x27;,
+       &#x27;2050-06-27T18:29:21.142294016&#x27;, &#x27;2177-03-29T18:54:47.432742400&#x27;,
+       &#x27;2077-10-27T20:11:06.304087552&#x27;, &#x27;2204-07-30T20:36:32.594535936&#x27;,
+       &#x27;2105-02-27T21:52:51.465881088&#x27;, &#x27;2231-11-30T22:18:17.756329472&#x27;,
+       &#x27;2132-06-29T23:34:36.627674624&#x27;, &#x27;2259-04-02T00:00:02.918123008&#x27;,
+       &#x27;2159-10-31T01:16:21.789468160&#x27;, &#x27;1810-08-04T10:30:31.000000000&#x27;,
+       &#x27;1882-11-14T02:01:45.191032320&#x27;, &#x27;1850-01-06T10:30:31.000000000&#x27;,
+       &#x27;2019-06-19T10:30:31.000000000&#x27;, &#x27;1889-06-10T10:30:31.000000000&#x27;,
+       &#x27;2019-06-29T10:30:31.000000000&#x27;, &#x27;1928-11-13T10:30:31.000000000&#x27;,
+       &#x27;2019-07-09T10:30:31.000000000&#x27;, &#x27;1968-04-17T10:30:31.000000000&#x27;,
+       &#x27;2019-07-19T10:30:31.000000000&#x27;, &#x27;2007-09-20T10:30:31.000000000&#x27;],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>latitude</span></div><div class='xr-var-dims'>(cells)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>52.31</div><input id='attrs-ea4cddb1-b28e-4d37-bfd5-e1f9468da8a5' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ea4cddb1-b28e-4d37-bfd5-e1f9468da8a5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-21aaf667-d731-4488-8a42-b279879d5769' class='xr-var-data-in' type='checkbox'><label for='data-21aaf667-d731-4488-8a42-b279879d5769' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([52.31410846])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>longitude</span></div><div class='xr-var-dims'>(cells)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>10.58</div><input id='attrs-ebccdd9b-7f4c-4b53-93c1-1964739d03c4' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ebccdd9b-7f4c-4b53-93c1-1964739d03c4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2f499729-473e-420e-be10-453765e05f51' class='xr-var-data-in' type='checkbox'><label for='data-2f499729-473e-420e-be10-453765e05f51' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([10.57764775])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-41a537cc-60ad-472c-b3ae-e07504a2f568' class='xr-section-summary-in' type='checkbox'  ><label for='section-41a537cc-60ad-472c-b3ae-e07504a2f568' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>bands</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-f398b5b7-957e-43ba-8d06-08f5e1496d07' class='xr-index-data-in' type='checkbox'/><label for='index-f398b5b7-957e-43ba-8d06-08f5e1496d07' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([&#x27;b02&#x27;, &#x27;b03&#x27;, &#x27;b04&#x27;, &#x27;b08&#x27;], dtype=&#x27;object&#x27;, name=&#x27;bands&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-7c1391e5-191e-44bb-84ec-9653e47b94aa' class='xr-index-data-in' type='checkbox'/><label for='index-7c1391e5-191e-44bb-84ec-9653e47b94aa' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(CFTimeIndex([2019-07-29 10:30:31, -97334-05-18 10:30:31, -95680-08-15 10:30:31,
+             -94969-12-06 10:30:31, -93314-03-04 10:30:31, -92603-06-24 10:30:31,
+             -90949-09-22 10:30:31, -90237-01-12 10:30:31, -88583-04-11 10:30:31,
+             -87872-08-01 10:30:31, -86218-10-29 10:30:31, -85506-02-18 10:30:31,
+             -83852-05-18 10:30:31, -83141-09-08 10:30:31, -81487-12-06 10:30:31,
+             -80775-03-28 10:30:31, -79121-06-25 10:30:31, -78410-10-16 10:30:31,
+             -76755-01-12 10:30:31, 1810-08-04 10:30:31, -9809-10-15 10:30:31,
+             1850-01-06 10:30:31, 2019-06-19 10:30:31, 1889-06-10 10:30:31,
+             2019-06-29 10:30:31, 1928-11-13 10:30:31, 2019-07-09 10:30:31,
+             1968-04-17 10:30:31, 2019-07-19 10:30:31, 2007-09-20 10:30:31],
+            dtype=&#x27;object&#x27;,
+            length=30,
+            calendar=&#x27;proleptic_gregorian&#x27;,
+            freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>cell_ids</div></div><div class='xr-index-preview'>HealpixIndex(level=19, indexing_scheme=nested)</div><input type='checkbox' disabled/><label></label><input id='index-51b433d1-80d6-4f9c-afd7-af9e9a977a13' class='xr-index-data-in' type='checkbox'/><label for='index-51b433d1-80d6-4f9c-afd7-af9e9a977a13' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>&lt;xdggs.healpix.HealpixIndex object at 0x16fd2f9b0&gt;</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-51d4eabb-5c4c-4e5e-9258-7b10261316e4' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-51d4eabb-5c4c-4e5e-9258-7b10261316e4' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">point</span><span class="o">.</span><span class="n">dggs</span><span class="o">.</span><span class="n">explore</span><span class="p">(</span>
+    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "161e3ac7161847eb9bee96e4baf5062a", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l_b08</span><span class="o">=</span><span class="n">point</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">bands</span><span class="o">=</span><span class="s1">&#39;b08&#39;</span><span class="p">)</span>
+<span class="n">l_b03</span><span class="o">=</span><span class="n">point</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">bands</span><span class="o">=</span><span class="s1">&#39;b03&#39;</span><span class="p">)</span>
+
+<span class="n">ndvi</span> <span class="o">=</span> <span class="p">((</span><span class="n">l_b03</span> <span class="o">-</span> <span class="n">l_b08</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">l_b03</span> <span class="o">+</span> <span class="n">l_b08</span><span class="p">))</span>
+
+<span class="n">ndvi</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span><span class="o">.</span><span class="n">dggs</span><span class="o">.</span><span class="n">explore</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a720e51c4a404571b5a5b68ca3504622", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dtotal</span><span class="o">.</span><span class="n">Sentinel2</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span><span class="o">.</span><span class="n">dggs</span><span class="o">.</span><span class="n">explore</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "fae553b868d5450bbc9e6276f441ce0f", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_arrow_table</span><span class="p">(</span><span class="n">polygons</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">arro3.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Array</span><span class="p">,</span> <span class="n">ChunkedArray</span><span class="p">,</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">Table</span>
+
+    <span class="k">if</span> <span class="n">coords</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;longitude&quot;</span><span class="p">]</span>
+
+    <span class="n">array</span> <span class="o">=</span> <span class="n">Array</span><span class="o">.</span><span class="n">from_arrow</span><span class="p">(</span><span class="n">polygons</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="s2">&quot;data&quot;</span>
+    <span class="n">arrow_arrays</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">array</span><span class="p">,</span>
+        <span class="s2">&quot;cell_ids&quot;</span><span class="p">:</span> <span class="n">ChunkedArray</span><span class="p">([</span><span class="n">Array</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="s2">&quot;cell_ids&quot;</span><span class="p">])]),</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">ChunkedArray</span><span class="p">([</span><span class="n">Array</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">data</span><span class="p">)]),</span>
+    <span class="p">}</span> <span class="o">|</span> <span class="p">{</span>
+        <span class="n">coord</span><span class="p">:</span> <span class="n">ChunkedArray</span><span class="p">([</span><span class="n">Array</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">coord</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)])</span>
+        <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span>
+        <span class="k">if</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">arr</span><span class="o">.</span><span class="n">coords</span>
+    <span class="p">}</span>
+
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">array</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">array</span> <span class="ow">in</span> <span class="n">arrow_arrays</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Table</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">arrow_arrays</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">CenteredNorm</span><span class="p">,</span> <span class="n">Normalize</span>
+
+    <span class="k">if</span> <span class="n">center</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">vmin</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">skipna</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">vmax</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">skipna</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">normalizer</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">halfrange</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">var</span> <span class="o">-</span> <span class="n">center</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">skipna</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">normalizer</span> <span class="o">=</span> <span class="n">CenteredNorm</span><span class="p">(</span><span class="n">vcenter</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">halfrange</span><span class="o">=</span><span class="n">halfrange</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">normalizer</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">exploire_layer</span><span class="p">(</span>
+    <span class="n">arr</span><span class="p">,</span>
+    <span class="n">cell_dim</span><span class="o">=</span><span class="s2">&quot;cells&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+    <span class="n">center</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">lonboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">SolidPolygonLayer</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">lonboard.colormap</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_continuous_cmap</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">colormaps</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">dims</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">cell_dim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">arr</span><span class="o">.</span><span class="n">dims</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;exploration only works with a single dimension (&#39;</span><span class="si">{</span><span class="n">cell_dim</span><span class="si">}</span><span class="s2">&#39;)&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">cell_ids</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">dggs</span><span class="o">.</span><span class="n">coord</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">grid_info</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">dggs</span><span class="o">.</span><span class="n">grid_info</span>
+
+    <span class="n">polygons</span> <span class="o">=</span> <span class="n">grid_info</span><span class="o">.</span><span class="n">cell_boundaries</span><span class="p">(</span><span class="n">cell_ids</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;geoarrow&quot;</span><span class="p">)</span>
+
+    <span class="n">normalized_data</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">variable</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">)</span>
+
+    <span class="n">colormap</span> <span class="o">=</span> <span class="n">colormaps</span><span class="p">[</span><span class="n">cmap</span><span class="p">]</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">apply_continuous_cmap</span><span class="p">(</span><span class="n">normalized_data</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+
+    <span class="n">table</span> <span class="o">=</span> <span class="n">create_arrow_table</span><span class="p">(</span><span class="n">polygons</span><span class="p">,</span> <span class="n">arr</span><span class="p">)</span>
+    <span class="n">layer</span> <span class="o">=</span> <span class="n">SolidPolygonLayer</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">,</span> <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">get_fill_color</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">layer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dtotal</span><span class="o">.</span><span class="n">Sentinel2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base rgba(0, 0, 0, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, white)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 15))
+  );
+}
+
+html[theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
+body.vscode-dark {
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base, rgba(255, 255, 255, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, #111111)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 15))
+  );
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: inline-block;
+  opacity: 0;
+  height: 0;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+  border: 2px solid transparent !important;
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0) !important;
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: "►";
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: "▼";
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: "(";
+}
+
+.xr-dim-list:after {
+  content: ")";
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ",";
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  border-color: var(--xr-background-color-row-odd);
+  margin-bottom: 0;
+  padding-top: 2px;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+  border-color: var(--xr-background-color-row-even);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  border-top: 2px dotted var(--xr-background-color);
+  padding-bottom: 20px !important;
+  padding-top: 10px !important;
+}
+
+.xr-var-attrs-in + label,
+.xr-var-data-in + label,
+.xr-index-data-in + label {
+  padding: 0 1px;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-data > pre,
+.xr-index-data > pre,
+.xr-var-data > table > tbody > tr {
+  background-color: transparent !important;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.xr-var-attrs-in:checked + label > .xr-icon-file-text2,
+.xr-var-data-in:checked + label > .xr-icon-database,
+.xr-index-data-in:checked + label > .xr-icon-database {
+  color: var(--xr-font-color0);
+  filter: drop-shadow(1px 1px 5px var(--xr-font-color2));
+  stroke-width: 0.8px;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray &#x27;Sentinel2&#x27; (time: 88, bands: 4, cells: 676289)&gt; Size: 2GB
+dask.array&lt;open_dataset-Sentinel2, shape=(88, 4, 676289), dtype=float64, chunksize=(1, 4, 676289), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * bands      (bands) &lt;U3 48B &#x27;b02&#x27; &#x27;b03&#x27; &#x27;b04&#x27; &#x27;b08&#x27;
+  * cell_ids   (cells) int64 5MB dask.array&lt;chunksize=(676289,), meta=np.ndarray&gt;
+  * time       (time) datetime64[ns] 704B 2019-07-29T10:30:31 ... 2022-08-12T...
+    latitude   (cells) float64 5MB 52.25 52.25 52.25 52.25 ... 52.34 52.34 52.34
+    longitude  (cells) float64 5MB 10.59 10.59 10.59 10.59 ... 10.51 10.51 10.51
+Dimensions without coordinates: cells
+Indexes:
+    cell_ids  HealpixIndex(level=19, indexing_scheme=nested)</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'Sentinel2'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 88</li><li><span class='xr-has-index'>bands</span>: 4</li><li><span class='xr-has-index'>cells</span>: 676289</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-a094ef53-14ad-4de4-9815-5791c0ad1ab6' class='xr-array-in' type='checkbox' checked><label for='section-a094ef53-14ad-4de4-9815-5791c0ad1ab6' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>dask.array&lt;chunksize=(1, 4, 676289), meta=np.ndarray&gt;</span></div><div class='xr-array-data'><table>
+    <tr>
+        <td>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 1.77 GiB </td>
+                        <td> 20.64 MiB </td>
+                    </tr>
+                    
+                    <tr>
+                        <th> Shape </th>
+                        <td> (88, 4, 676289) </td>
+                        <td> (1, 4, 676289) </td>
+                    </tr>
+                    <tr>
+                        <th> Dask graph </th>
+                        <td colspan="2"> 88 chunks in 2 graph layers </td>
+                    </tr>
+                    <tr>
+                        <th> Data type </th>
+                        <td colspan="2"> float64 numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="194" height="90" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="10" y1="0" x2="24" y2="14" style="stroke-width:2" />
+  <line x1="10" y1="25" x2="24" y2="40" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="10" y1="0" x2="10" y2="25" style="stroke-width:2" />
+  <line x1="10" y1="0" x2="10" y2="26" />
+  <line x1="11" y1="1" x2="11" y2="26" />
+  <line x1="12" y1="2" x2="12" y2="27" />
+  <line x1="13" y1="3" x2="13" y2="28" />
+  <line x1="13" y1="3" x2="13" y2="29" />
+  <line x1="14" y1="4" x2="14" y2="29" />
+  <line x1="15" y1="5" x2="15" y2="30" />
+  <line x1="16" y1="6" x2="16" y2="31" />
+  <line x1="16" y1="6" x2="16" y2="32" />
+  <line x1="17" y1="7" x2="17" y2="33" />
+  <line x1="18" y1="8" x2="18" y2="33" />
+  <line x1="19" y1="9" x2="19" y2="34" />
+  <line x1="20" y1="10" x2="20" y2="35" />
+  <line x1="20" y1="10" x2="20" y2="36" />
+  <line x1="21" y1="11" x2="21" y2="37" />
+  <line x1="22" y1="12" x2="22" y2="37" />
+  <line x1="23" y1="13" x2="23" y2="38" />
+  <line x1="24" y1="14" x2="24" y2="39" />
+  <line x1="24" y1="14" x2="24" y2="40" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="10.0,0.0 24.9485979497544,14.948597949754403 24.9485979497544,40.36121446433689 10.0,25.412616514582485" style="fill:#8B4903A0;stroke-width:0"/>
+
+  <!-- Horizontal lines -->
+  <line x1="10" y1="0" x2="130" y2="0" style="stroke-width:2" />
+  <line x1="10" y1="0" x2="130" y2="0" />
+  <line x1="11" y1="1" x2="131" y2="1" />
+  <line x1="12" y1="2" x2="132" y2="2" />
+  <line x1="13" y1="3" x2="133" y2="3" />
+  <line x1="13" y1="3" x2="133" y2="3" />
+  <line x1="14" y1="4" x2="134" y2="4" />
+  <line x1="15" y1="5" x2="135" y2="5" />
+  <line x1="16" y1="6" x2="136" y2="6" />
+  <line x1="16" y1="6" x2="136" y2="6" />
+  <line x1="17" y1="7" x2="137" y2="7" />
+  <line x1="18" y1="8" x2="138" y2="8" />
+  <line x1="19" y1="9" x2="139" y2="9" />
+  <line x1="20" y1="10" x2="140" y2="10" />
+  <line x1="20" y1="10" x2="140" y2="10" />
+  <line x1="21" y1="11" x2="141" y2="11" />
+  <line x1="22" y1="12" x2="142" y2="12" />
+  <line x1="23" y1="13" x2="143" y2="13" />
+  <line x1="24" y1="14" x2="144" y2="14" />
+  <line x1="24" y1="14" x2="144" y2="14" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="10" y1="0" x2="24" y2="14" style="stroke-width:2" />
+  <line x1="130" y1="0" x2="144" y2="14" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="10.0,0.0 130.0,0.0 144.9485979497544,14.948597949754403 24.9485979497544,14.948597949754403" style="fill:#8B4903A0;stroke-width:0"/>
+
+  <!-- Horizontal lines -->
+  <line x1="24" y1="14" x2="144" y2="14" style="stroke-width:2" />
+  <line x1="24" y1="40" x2="144" y2="40" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="24" y1="14" x2="24" y2="40" style="stroke-width:2" />
+  <line x1="144" y1="14" x2="144" y2="40" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="24.9485979497544,14.948597949754403 144.9485979497544,14.948597949754403 144.9485979497544,40.36121446433689 24.9485979497544,40.36121446433689" style="fill:#ECB172A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="84.948598" y="60.361214" font-size="1.0rem" font-weight="100" text-anchor="middle" >676289</text>
+  <text x="164.948598" y="27.654906" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(0,164.948598,27.654906)">4</text>
+  <text x="7.474299" y="52.886915" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(45,7.474299,52.886915)">88</text>
+</svg>
+        </td>
+    </tr>
+</table></div></div></li><li class='xr-section-item'><input id='section-5af09f4b-f714-481a-ac15-9f9b41b10f26' class='xr-section-summary-in' type='checkbox'  checked><label for='section-5af09f4b-f714-481a-ac15-9f9b41b10f26' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>bands</span></div><div class='xr-var-dims'>(bands)</div><div class='xr-var-dtype'>&lt;U3</div><div class='xr-var-preview xr-preview'>&#x27;b02&#x27; &#x27;b03&#x27; &#x27;b04&#x27; &#x27;b08&#x27;</div><input id='attrs-cf4af59e-76f2-4a8d-8ef5-26322964f269' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-cf4af59e-76f2-4a8d-8ef5-26322964f269' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ebbfa622-be8f-46b2-8387-03872503f0aa' class='xr-var-data-in' type='checkbox'><label for='data-ebbfa622-be8f-46b2-8387-03872503f0aa' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;b02&#x27;, &#x27;b03&#x27;, &#x27;b04&#x27;, &#x27;b08&#x27;], dtype=&#x27;&lt;U3&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>cell_ids</span></div><div class='xr-var-dims'>(cells)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(676289,), meta=np.ndarray&gt;</div><input id='attrs-1fa34d8f-0734-429e-971a-c94f48b99e35' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1fa34d8f-0734-429e-971a-c94f48b99e35' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9a5e0be1-1954-4f91-ae33-811954ccd9c3' class='xr-var-data-in' type='checkbox'><label for='data-9a5e0be1-1954-4f91-ae33-811954ccd9c3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_name :</span></dt><dd>healpix</dd><dt><span>nest :</span></dt><dd>True</dd><dt><span>nside :</span></dt><dd>524288</dd></dl></div><div class='xr-var-data'><table>
+    <tr>
+        <td>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 5.16 MiB </td>
+                        <td> 5.16 MiB </td>
+                    </tr>
+                    
+                    <tr>
+                        <th> Shape </th>
+                        <td> (676289,) </td>
+                        <td> (676289,) </td>
+                    </tr>
+                    <tr>
+                        <th> Dask graph </th>
+                        <td colspan="2"> 1 chunks in 2 graph layers </td>
+                    </tr>
+                    <tr>
+                        <th> Data type </th>
+                        <td colspan="2"> int64 numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="170" height="75" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="0" y1="0" x2="120" y2="0" style="stroke-width:2" />
+  <line x1="0" y1="25" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="0" y1="0" x2="0" y2="25" style="stroke-width:2" />
+  <line x1="120" y1="0" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="0.0,0.0 120.0,0.0 120.0,25.412616514582485 0.0,25.412616514582485" style="fill:#ECB172A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="60.000000" y="45.412617" font-size="1.0rem" font-weight="100" text-anchor="middle" >676289</text>
+  <text x="140.000000" y="12.706308" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(0,140.000000,12.706308)">1</text>
+</svg>
+        </td>
+    </tr>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2019-07-29T10:30:31 ... 2022-08-...</div><input id='attrs-f73adcca-86e7-4af7-b30e-aa6573ed77dc' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f73adcca-86e7-4af7-b30e-aa6573ed77dc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9b972626-dfca-4ec6-9e27-74bc427b4b70' class='xr-var-data-in' type='checkbox'><label for='data-9b972626-dfca-4ec6-9e27-74bc427b4b70' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;2019-07-29T10:30:31.000000000&#x27;, &#x27;2040-07-25T10:26:01.623774720&#x27;,
+       &#x27;1941-02-23T11:42:20.495119872&#x27;, &#x27;2067-11-25T12:07:46.785568256&#x27;,
+       &#x27;1968-06-25T13:24:05.656913408&#x27;, &#x27;2095-03-27T13:49:31.947361792&#x27;,
+       &#x27;1995-10-26T15:05:50.818706944&#x27;, &#x27;2122-07-28T15:31:17.109155328&#x27;,
+       &#x27;2023-02-25T16:47:35.980500480&#x27;, &#x27;2149-11-27T17:13:02.270948864&#x27;,
+       &#x27;2050-06-27T18:29:21.142294016&#x27;, &#x27;2177-03-29T18:54:47.432742400&#x27;,
+       &#x27;2077-10-27T20:11:06.304087552&#x27;, &#x27;2204-07-30T20:36:32.594535936&#x27;,
+       &#x27;2105-02-27T21:52:51.465881088&#x27;, &#x27;2231-11-30T22:18:17.756329472&#x27;,
+       &#x27;2132-06-29T23:34:36.627674624&#x27;, &#x27;2259-04-02T00:00:02.918123008&#x27;,
+       &#x27;2159-10-31T01:16:21.789468160&#x27;, &#x27;1810-08-04T10:30:31.000000000&#x27;,
+       &#x27;1882-11-14T02:01:45.191032320&#x27;, &#x27;1850-01-06T10:30:31.000000000&#x27;,
+       &#x27;2019-06-19T10:30:31.000000000&#x27;, &#x27;1889-06-10T10:30:31.000000000&#x27;,
+       &#x27;2019-06-29T10:30:31.000000000&#x27;, &#x27;1928-11-13T10:30:31.000000000&#x27;,
+       &#x27;2019-07-09T10:30:31.000000000&#x27;, &#x27;1968-04-17T10:30:31.000000000&#x27;,
+       &#x27;2019-07-19T10:30:31.000000000&#x27;, &#x27;2007-09-20T10:30:31.000000000&#x27;,
+       &#x27;2019-07-29T10:30:31.000000000&#x27;, &#x27;2047-02-22T10:30:31.000000000&#x27;,
+       &#x27;2019-08-08T10:30:31.000000000&#x27;, &#x27;2086-07-27T10:30:31.000000000&#x27;,
+       &#x27;2019-08-18T10:30:31.000000000&#x27;, &#x27;2125-12-30T10:30:31.000000000&#x27;,
+       &#x27;2101-07-21T15:35:46.485380608&#x27;, &#x27;2020-06-03T10:30:31.000000000&#x27;,
+       &#x27;2100-03-28T11:21:23.580896768&#x27;, &#x27;2020-06-13T10:30:31.000000000&#x27;,
+       &#x27;2139-08-31T11:21:23.580896768&#x27;, &#x27;2020-06-23T10:30:31.000000000&#x27;,
+       &#x27;2179-02-02T11:21:23.580896768&#x27;, &#x27;2020-07-03T10:30:31.000000000&#x27;,
+       &#x27;2218-07-08T11:21:23.580896768&#x27;, &#x27;2020-07-13T10:30:31.000000000&#x27;,
+       &#x27;2257-12-10T11:21:23.580896768&#x27;, &#x27;2020-07-23T10:30:31.000000000&#x27;,
+       &#x27;1712-10-24T11:46:49.871345152&#x27;, &#x27;2020-08-02T10:30:31.000000000&#x27;,
+       &#x27;1752-03-28T11:46:49.871345152&#x27;, &#x27;2020-08-12T10:30:31.000000000&#x27;,
+       &#x27;1791-08-31T11:46:49.871345152&#x27;, &#x27;2020-08-22T10:30:31.000000000&#x27;,
+       &#x27;1831-02-03T11:46:49.871345152&#x27;, &#x27;1997-12-10T06:40:34.582857216&#x27;,
+       &#x27;2124-09-11T07:06:00.873305600&#x27;, &#x27;2025-04-11T08:22:19.744650752&#x27;,
+       &#x27;2152-01-12T08:47:46.035099136&#x27;, &#x27;2052-08-11T10:04:04.906444288&#x27;,
+       &#x27;2179-05-14T10:29:31.196892672&#x27;, &#x27;1884-03-08T12:37:42.452241920&#x27;,
+       &#x27;2021-07-08T10:30:31.000000000&#x27;, &#x27;1923-08-12T12:37:42.452241920&#x27;,
+       &#x27;2021-07-18T10:30:31.000000000&#x27;, &#x27;1963-01-14T12:37:42.452241920&#x27;,
+       &#x27;2021-07-28T10:30:31.000000000&#x27;, &#x27;2002-06-18T12:37:42.452241920&#x27;,
+       &#x27;2021-08-07T10:30:31.000000000&#x27;, &#x27;2041-11-20T12:37:42.452241920&#x27;,
+       &#x27;1731-06-28T19:23:43.296308736&#x27;, &#x27;2081-04-24T12:37:42.452241920&#x27;,
+       &#x27;1758-10-28T21:05:28.458102272&#x27;, &#x27;1938-12-24T20:59:59.278769664&#x27;,
+       &#x27;1839-07-24T22:16:18.150114816&#x27;, &#x27;2022-06-13T10:30:31.000000000&#x27;,
+       &#x27;1867-08-20T23:58:03.311908352&#x27;, &#x27;2022-06-23T10:30:31.000000000&#x27;,
+       &#x27;1894-12-21T01:39:48.473701888&#x27;, &#x27;2020-12-26T02:05:14.764150272&#x27;,
+       &#x27;1921-07-27T03:21:33.635495424&#x27;, &#x27;2049-01-22T03:46:59.925943808&#x27;,
+       &#x27;1948-11-26T05:03:18.797288960&#x27;, &#x27;2075-08-28T05:28:45.087737344&#x27;,
+       &#x27;1976-03-28T06:45:03.959082496&#x27;, &#x27;2102-12-29T07:10:30.249530880&#x27;,
+       &#x27;2004-04-24T08:26:49.120876032&#x27;, &#x27;2022-08-12T10:30:31.000000000&#x27;],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>latitude</span></div><div class='xr-var-dims'>(cells)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>52.25 52.25 52.25 ... 52.34 52.34</div><input id='attrs-6e201fe7-432d-4bd2-a6c7-d9a2d59ae0f2' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-6e201fe7-432d-4bd2-a6c7-d9a2d59ae0f2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-826b4b67-4add-476d-9417-917153c8600e' class='xr-var-data-in' type='checkbox'><label for='data-826b4b67-4add-476d-9417-917153c8600e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([52.24772734, 52.24772734, 52.24772734, ..., 52.34069494,
+       52.34078922, 52.34078922], shape=(676289,))</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>longitude</span></div><div class='xr-var-dims'>(cells)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>10.59 10.59 10.59 ... 10.51 10.51</div><input id='attrs-f923f468-c10c-44bc-990e-cae044e12fa0' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f923f468-c10c-44bc-990e-cae044e12fa0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fc016b64-bcb6-467a-b31e-b42d26c8847a' class='xr-var-data-in' type='checkbox'><label for='data-fc016b64-bcb6-467a-b31e-b42d26c8847a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([10.59005105, 10.58918458, 10.58961782, ..., 10.51253936,
+       10.51256472, 10.51234759], shape=(676289,))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-75e51384-9907-416c-be8b-d239b798bb63' class='xr-section-summary-in' type='checkbox'  ><label for='section-75e51384-9907-416c-be8b-d239b798bb63' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>bands</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-17a9e242-f3e2-4252-adfb-9ee3f0db6158' class='xr-index-data-in' type='checkbox'/><label for='index-17a9e242-f3e2-4252-adfb-9ee3f0db6158' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([&#x27;b02&#x27;, &#x27;b03&#x27;, &#x27;b04&#x27;, &#x27;b08&#x27;], dtype=&#x27;object&#x27;, name=&#x27;bands&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-212edcf9-ba27-4c70-9630-3ee505439629' class='xr-index-data-in' type='checkbox'/><label for='index-212edcf9-ba27-4c70-9630-3ee505439629' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(CFTimeIndex([2019-07-29 10:30:31, -97334-05-18 10:30:31, -95680-08-15 10:30:31,
+             -94969-12-06 10:30:31, -93314-03-04 10:30:31, -92603-06-24 10:30:31,
+             -90949-09-22 10:30:31, -90237-01-12 10:30:31, -88583-04-11 10:30:31,
+             -87872-08-01 10:30:31, -86218-10-29 10:30:31, -85506-02-18 10:30:31,
+             -83852-05-18 10:30:31, -83141-09-08 10:30:31, -81487-12-06 10:30:31,
+             -80775-03-28 10:30:31, -79121-06-25 10:30:31, -78410-10-16 10:30:31,
+             -76755-01-12 10:30:31, 1810-08-04 10:30:31, -9809-10-15 10:30:31,
+             1850-01-06 10:30:31, 2019-06-19 10:30:31, 1889-06-10 10:30:31,
+             2019-06-29 10:30:31, 1928-11-13 10:30:31, 2019-07-09 10:30:31,
+             1968-04-17 10:30:31, 2019-07-19 10:30:31, 2007-09-20 10:30:31,
+             2019-07-29 10:30:31, 2047-02-22 10:30:31, 2019-08-08 10:30:31,
+             2086-07-27 10:30:31, 2019-08-18 10:30:31, 2125-12-30 10:30:31,
+             9116-03-15 10:30:31, 2020-06-03 10:30:31, 3269-05-06 10:30:31,
+             2020-06-13 10:30:31, 3308-10-09 10:30:31, 2020-06-23 10:30:31,
+             3348-03-13 10:30:31, 2020-07-03 10:30:31, 3387-08-16 10:30:31,
+             2020-07-13 10:30:31, 3427-01-19 10:30:31, 2020-07-23 10:30:31,
+             3466-06-23 10:30:31, 2020-08-02 10:30:31, 3505-11-26 10:30:31,
+             2020-08-12 10:30:31, 3545-04-30 10:30:31, 2020-08-22 10:30:31,
+             3584-10-02 10:30:31, 162165-10-01 10:30:31, 162877-01-21 10:30:31,
+             164531-04-21 10:30:31, 165242-08-11 10:30:31, 166896-11-07 10:30:31,
+             167608-02-29 10:30:31, 4806-12-15 10:30:31, 2021-07-08 10:30:31,
+             4846-05-19 10:30:31, 2021-07-18 10:30:31, 4885-10-21 10:30:31,
+             2021-07-28 10:30:31, 4925-03-26 10:30:31, 2021-08-07 10:30:31,
+             4964-08-28 10:30:31, 179435-12-03 10:30:31, 5004-02-01 10:30:31,
+             181801-06-22 10:30:31, 248036-03-26 10:30:31, 249690-06-23 10:30:31,
+             2022-06-13 10:30:31, 252056-10-07 10:30:31, 2022-06-23 10:30:31,
+             254422-04-27 10:30:31, 255132-11-21 10:30:31, 256787-02-18 10:30:31,
+             257499-03-07 10:30:31, 259152-09-07 10:30:31, 259863-12-29 10:30:31,
+             261518-03-28 10:30:31, 262229-07-18 10:30:31, 263884-07-11 10:30:31,
+             2022-08-12 10:30:31],
+            dtype=&#x27;object&#x27;,
+            length=88,
+            calendar=&#x27;proleptic_gregorian&#x27;,
+            freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>cell_ids</div></div><div class='xr-index-preview'>HealpixIndex(level=19, indexing_scheme=nested)</div><input type='checkbox' disabled/><label></label><input id='index-ace61fa0-863e-4a38-8d1a-3ec1a76d4376' class='xr-index-data-in' type='checkbox'/><label for='index-ace61fa0-863e-4a38-8d1a-3ec1a76d4376' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>&lt;xdggs.healpix.HealpixIndex object at 0x16fd69950&gt;</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-7b2fd6ee-305b-4d84-8d2f-8c29ee27ef3d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-7b2fd6ee-305b-4d84-8d2f-8c29ee27ef3d' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="multibands-visualisation-r-g-b">
+<h1>multibands visualisation R/G/B<a class="headerlink" href="#multibands-visualisation-r-g-b" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">lonboard</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">itime</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">ratio</span><span class="o">=</span><span class="mf">3E-4</span>
+
+
+<span class="n">itime</span><span class="o">=</span><span class="mi">6</span>
+<span class="n">ratio</span><span class="o">=</span><span class="mf">5E-4</span>
+
+<span class="c1">#use of tanh to concentrate the scale variation for the lower values</span>
+<span class="n">ds1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">ratio</span><span class="o">*</span><span class="n">dtotal</span><span class="o">.</span><span class="n">Sentinel2</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">bands</span><span class="o">=</span><span class="s1">&#39;b04&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">itime</span><span class="p">))</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+<span class="n">ds2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">ratio</span><span class="o">*</span><span class="n">dtotal</span><span class="o">.</span><span class="n">Sentinel2</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">bands</span><span class="o">=</span><span class="s1">&#39;b03&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">itime</span><span class="p">))</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+<span class="n">ds3</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">ratio</span><span class="o">*</span><span class="n">dtotal</span><span class="o">.</span><span class="n">Sentinel2</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">bands</span><span class="o">=</span><span class="s1">&#39;b02&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">itime</span><span class="p">))</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+
+<span class="n">lonboard</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">exploire_layer</span><span class="p">(</span>
+            <span class="n">ds1</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span>
+        <span class="p">),</span>
+        <span class="n">exploire_layer</span><span class="p">(</span>
+            <span class="n">ds2</span><span class="p">,</span> 
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greens&#39;</span><span class="p">),</span>
+        <span class="n">exploire_layer</span><span class="p">(</span>
+            <span class="n">ds3</span><span class="p">,</span> 
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4c9b86c6aa924fc9837813da763ceb75", "version_major": 2, "version_minor": 1}</script></div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "EOPF-DGGS/BIDS25_demo",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="dggs_visualization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Visualization and Analytics</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">EO Data Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multibands-visualisation-r-g-b">multibands visualisation R/G/B</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Big Data From Space (BiDS) 2025 Demo Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
