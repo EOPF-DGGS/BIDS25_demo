@@ -8,3 +8,26 @@ version = "0.1.0"
 [tasks]
 
 [dependencies]
+jupyterlab = ">=4.4.9,<5"
+ipykernel = ">=6.30.1,<7"
+python = "3.13.*"
+healpix-geo = ">=0.0.6,<0.0.7"
+s3fs = ">=2025.9.0,<2026"
+fsspec = ">=2025.9.0,<2026"
+zarr = "<3"
+intake = "<2"
+intake-xarray = "<2"
+dask = ">=2025.8.0"
+distributed = ">=2025.9.1,<2026"
+healpy = ">=1.18.1,<2"
+sparse = ">=0.17.0,<0.18"
+shapely = ">=2.1.2,<3"
+cartopy = ">=0.25.0,<0.26"
+matplotlib-base = ">=3.10.6,<4"
+plotly = ">=6.3.0,<7"
+cdshealpix = ">=0.7.1,<0.8"
+xarray-eopf = ">=0.2.2,<0.3"
+jupyter-resource-usage = ">=1.2.0,<2"
+
+[pypi-dependencies]
+xdggs = { git = "https://github.com/keewis/xdggs.git", branch = "explore" }
